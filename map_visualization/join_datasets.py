@@ -2,9 +2,18 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import geopandas as gpd
 
+################################################
+
+# Original dataset
 df_filename = '../data/raw/scraped_data.csv'
 
+# Additional dataset
 df2_filename = '../data/raw/final_cleaned_data_Racoons_command.csv'
+
+# Joined dataset
+df_combined_filename = '../data/raw/combined_data.csv'
+
+################################################
 
 df = pd.read_csv(df_filename,delimiter=',',encoding='utf-8')
 df_2 = pd.read_csv(df2_filename,delimiter=',',encoding='utf-8')
@@ -64,6 +73,7 @@ print( 'All data:', df_combined.shape, '\n\n')
 
 print(df_combined.info())
 
+df_combined.to_csv(df_combined_filename, index=False, encoding='utf-8')
 
 ##################################################################
 
