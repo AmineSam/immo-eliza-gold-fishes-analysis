@@ -62,11 +62,21 @@ df_price_per_m2.rename(columns={'price_per_m2': 'median_price_per_m2'}, inplace=
 df_price_per_m2_average = df.groupby('postal_code', as_index=False)['price_per_m2'].mean()
 df_price_per_m2_average.rename(columns={'price_per_m2': 'mean_price_per_m2'}, inplace=True)
 
+percent_luxurious = (
+    df.groupby('postal_code')['is_luxurious']
+    .mean()  # mean - 
+    .mul(100)  # convert to percents
+    .astype(int)
+    .reset_index(name='percent_luxurious')
+)
+
+
 df_summary = (df_count
               .merge(median_price, on='postal_code', how='left')
               .merge(mean_price, on='postal_code', how='left')
               .merge(df_price_per_m2, on='postal_code', how='left')
               .merge(df_price_per_m2_average, on='postal_code', how='left')
+              .merge(percent_luxurious, on='postal_code', how='left')
               )
 
 #print( df_summary.shape )
@@ -103,11 +113,20 @@ df_price_per_m2.rename(columns={'price_per_m2': 'median_price_per_m2'}, inplace=
 df_price_per_m2_average = df.groupby('province_num', as_index=False)['price_per_m2'].mean()
 df_price_per_m2_average.rename(columns={'price_per_m2': 'mean_price_per_m2'}, inplace=True)
 
+percent_luxurious = (
+    df.groupby('province_num')['is_luxurious']
+    .mean()  # mean - 
+    .mul(100)  # convert to percents
+    .astype(int)
+    .reset_index(name='percent_luxurious')
+)
+
 df_summary_prov = (df_count
               .merge(median_price, on='province_num', how='left')
               .merge(mean_price, on='province_num', how='left')
               .merge(df_price_per_m2, on='province_num', how='left')
               .merge(df_price_per_m2_average, on='province_num', how='left')
+              .merge(percent_luxurious, on='province_num', how='left')
               )
 
 assert df_summary_prov.isna().sum().sum() == 0
@@ -149,11 +168,15 @@ df_summary_prov.to_csv(filepath, sep=';', index=False, encoding='utf-8')
 
 df_summary_prov.sort_values(by='median_total_price', inplace=True, ascending=True)
 
-if(0):
+if(1):
 
     print( tabulate(df_summary_prov[['province_name',
                                      'median_total_price',
                                      'mean_total_price',
+                                     'percent_luxurious',
+                                     'median_price_per_m2',
+                                     'mean_price_per_m2'
+                                     
                                     ]],
                     headers='keys', 
                     tablefmt='psql', 

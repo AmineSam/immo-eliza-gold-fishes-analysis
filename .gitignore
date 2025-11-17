@@ -216,3 +216,4 @@ __marimo__/
 .streamlit/secrets.toml
 caveeagle_service_scripts/ToDo.doc
 caveeagle_service_scripts/tmp_work.py
+utility_*
