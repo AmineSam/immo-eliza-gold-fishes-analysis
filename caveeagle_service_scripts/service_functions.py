@@ -35,16 +35,16 @@ def get_province_by_postcode(pcode: int):
         return 5, 'Namur'
     elif 6000 <= pcode <= 6599 or 7000 <= pcode <= 7999:
         return 7, 'Hainaut'
-    elif 6600 <= pcode <= 6900:
+    elif 6600 <= pcode <= 6999:
         return 6, 'Luxembourg'
     elif 8000 <= pcode <= 8999:
         return 8, 'West Flanders'
     elif 9000 <= pcode <= 9999:
         return 9, 'East Flanders'
     else:
+        print('Incorrect code:',pcode)
         return 0,'Incorrect postal code'
 
 #############################################
 
-print(  get_province_by_postcode(9020) )
 
