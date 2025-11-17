@@ -47,4 +47,21 @@ def get_province_by_postcode(pcode: int):
 
 #############################################
 
+def get_region_by_postcode(pcode: int):
+    """
+    Convert belgium postal code to the name of region (and abstract number)
+    """
+    if 1000 <= pcode <= 1299:
+        return 1, 'Brussels'
+        
+    elif 1300 <= pcode <= 1499 or 4000 <= pcode <= 7999:
+        return 2,'Wallonia'
+        
+    elif 1500 <= pcode <= 3999 or 8000 <= pcode <= 9999:
+        return 3, 'Flanders'
+    else:
+        print('Incorrect code:',pcode)
+        return 0,'Incorrect postal code'
+
+
 

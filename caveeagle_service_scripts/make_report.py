@@ -6,7 +6,7 @@ import numpy as np
 
 from tabulate import tabulate
 
-from service_functions import get_province_by_postcode  
+from service_functions import get_province_by_postcode, get_region_by_postcode  
 
 ################################################
 
@@ -25,8 +25,6 @@ csv_name = '../shapefiles/postal_codes.csv'
 df_post = pd.read_csv(csv_name, sep=';' )
 df_post['postal_code'] = df_post['postal_code'].astype(int)
 
-#print( get_province_by_postcode( 9000 ))
-
 ##################################################################
 
 ### Add province and mun name to the dataset ###
@@ -44,6 +42,12 @@ df[['province_num', 'province_name']] = (
 
 assert df['mun_name'].isna().sum() == 0 
 assert df['province_name'].isna().sum() == 0
+
+df[['region_num', 'region_name']] = (
+    df['postal_code']
+    .apply(get_region_by_postcode)
+    .apply(pd.Series)
+)
 
 ##################################################################
 
@@ -87,14 +91,18 @@ assert df_summary.isna().sum().sum() == 0
 float_cols = df_summary.select_dtypes(include='float').columns
 df_summary[float_cols] = df_summary[float_cols].astype('int')
 
-# Merge with names of regions
+# Merge with names of municip.
 
 df_summary = df_summary.merge(   df_post[['postal_code', 'mun_name']],
     on='postal_code',
     how='left'
 )
 
-#print( df_summary.shape )
+province_map = df[['postal_code','province_num', 'province_name']].drop_duplicates() 
+df_summary = df_summary.merge(province_map, on='postal_code', how='left')
+
+regions_map = df[['postal_code','region_num', 'region_name']].drop_duplicates() 
+df_summary = df_summary.merge(regions_map, on='postal_code', how='left')
 
 ##################################################################
 
@@ -168,7 +176,7 @@ df_summary_prov.to_csv(filepath, sep=';', index=False, encoding='utf-8')
 
 df_summary_prov.sort_values(by='median_total_price', inplace=True, ascending=True)
 
-if(1):
+if(0):
 
     print( tabulate(df_summary_prov[['province_name',
                                      'median_total_price',
@@ -184,5 +192,5 @@ if(1):
 
 ##################################################################
 
-print('Job have done')
+print('The job have done')
 
