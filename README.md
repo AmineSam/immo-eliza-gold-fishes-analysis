@@ -270,7 +270,7 @@ province = get_province_from_postal_code(1000)  # Returns 'Brussels'
 **Gold Fishes Team** - BeCode Data Analysis Project
 
 ### Contributors
-- Jens Bogaert
-- Mohammed Amine Samoudi
-- Wiktor Porczyński
-- Victor
+- [Jens Bogaert](https://github.com/BogJ674) 🐠
+- [Amine Samoudi](https://github.com/AmineSam) 🐠
+- [Wiktor Porczyński](https://github.com/wikporc) 🐠
+- [Victor](https://github.com/caveeagle)) 🐠
