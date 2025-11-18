@@ -23,7 +23,7 @@ This project performs in-depth analysis of Belgian real estate data to understan
 - 23,321 properties analyzed (after cleaning)
 - 66 features per property
 - Coverage across 580+ municipalities in Belgium
-- 11 provinces analyzed
+- 10 provinces (+ Brussels) analyzed
 
 ## 🎯 Project Goals
 
@@ -97,7 +97,6 @@ This project performs in-depth analysis of Belgian real estate data to understan
 ### 3. Data Quality Insights
 
 - **92% data retention** after cleaning (660 properties removed)
-- **Property type** is a major factor in data missingness patterns
 - **Type-specific features** require separate handling for houses vs. apartments
 - **Outlier patterns** identified using IQR method
 
