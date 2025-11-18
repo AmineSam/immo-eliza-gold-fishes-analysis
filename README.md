@@ -273,4 +273,4 @@ province = get_province_from_postal_code(1000)  # Returns 'Brussels'
 - [Jens Bogaert](https://github.com/BogJ674) 🐠
 - [Amine Samoudi](https://github.com/AmineSam) 🐠
 - [Wiktor Porczyński](https://github.com/wikporc) 🐠
-- [Victor](https://github.com/caveeagle)) 🐠
+- [Victor](https://github.com/caveeagle) 🐠
